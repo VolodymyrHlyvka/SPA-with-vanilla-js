@@ -1,57 +1,55 @@
 const Router = {
-  init: () => {
-    document.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", (event) => {
-        event.preventDefault();
-        const url = event.target.getAttribute("href");
-        Router.go(url);
-      });
-    });
-    window.addEventListener("popstate", (event) => {
-      Router.go(event.state.route, false);
-    });
+    init: () => {
+        document.querySelectorAll("a.navlink").forEach(a => {
+            a.addEventListener("click", event => {
+                event.preventDefault();
+                // const url1 = event.target.href;
+                const url = event.target.getAttribute("href");
+                Router.go(url);
+            });
+        })
+        // Event Handler for URL changes
+        window.addEventListener("popstate", event => {
+            Router.go(event.state.route, false);
+        });
 
-    Router.go(location.pathname);
-  },
+        // Check the initial URL
+        Router.go(location.pathname);
+    },
+    go: (route, addToHistory=true) => {
+        console.log(`Going to ${route}`);
 
-  go: (route, addToHistory = true) => {
-    if (addToHistory) {
-      history.pushState({ route }, "", route);
-    }
-    let pageHeading = null;
-    let pageElement = null;
-    console.log("route", route);
+        if (addToHistory) {
+            history.pushState({ route }, '', route);
+        }
+        let pageElement = null;
+        switch (route) {
+            case "/":
+                pageElement = document.createElement("menu-page");
+                break;
+            case "/order":
+                pageElement = document.createElement("order-page");
+                break;
+            default:
+                if (route.startsWith("/product-")) {
+                    pageElement = document.createElement("details-page");
+                    const paramId = route.substring(route.lastIndexOf("-")+1);
+                    pageElement.dataset.productId = paramId;
+                }
+        }
+        if (pageElement) {
+            // document.querySelector("main").children[0].remove();
+            const cache = document.querySelector("main");
+            cache.innerHTML = "";
+            cache.appendChild(pageElement);
+            window.scrollX = 0;
+            window.scrollY = 0;
 
-    switch (route) {
-      case "/":
-      case "/shop-all":
-      case "/best-sellers":
-        pageHeading = document.createElement("h1");
-        pageHeading.textContent = route;
-        const productsContainer = document.querySelector(".products-container");
-        productsContainer.innerHTML = "";
-        pageElement = document.createElement("products-content");
-        productsContainer.appendChild(pageElement);
-        break;
-      default:
-        if (route.includes("/product-")) {
-          pageHeading = document.createElement("h1");
-          pageHeading.textContent = "Product";
-          pageHeading.dataset.productId = route.substring(
-            route.lastIndexOf("-") + 1
-          );
+        } else {
+            // 404
+            document.querySelector("main").innerHTML = "Oups, 404!"
+
         }
     }
-    if (pageHeading) {
-      const pageHeader = document.querySelector(".page-header");
-      pageHeader.innerHTML = "";
-      pageHeading.classList.add("page-header-heading");
-      pageHeader.appendChild(pageHeading);
-    }
-
-    window.scrollX = 0;
-    window.scrollY = 0;
-  },
-};
-
+}
 export default Router;

@@ -1,106 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blank.</title>
-    <link rel="preload" href="/components/products.css" as="stylesheet" />
-    <link rel="stylesheet" href="style.css" />
-    <script src="index.js" defer type="module"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Coffee Masters</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    /> -->
+    <meta name="theme-color" content="#43281C" />
+    <!-- <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    /> -->
+    <link rel="preload" href="components/DetailsPage.css" as="style" />
+
+    <script src="app.js" defer type="module"></script>
+    <script src="services/SW.js" defer></script>
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="manifest" href="app.webmanifest" />
+    <link rel="apple-touch-icon" href="images/icons/icon.png" />
+    <link rel="icon" href="images/icons/icon.png" />
   </head>
+
   <body>
-    <div>
-      <header class="header flex align-items-center justify-content-between">
-        <span></span>
-        <img
-          src="https://blank-sunglasses.com/cdn/shop/files/BLANK_LOGO_3_220x.png?v=1667146512"
-          alt="logo"
-          width="220"
-          height="40"
-        />
-        <a class="open-cart c-pointer" href="/cart" id="linkCart">
-          <img
-            width="24"
-            height="24"
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABbUlEQVR4nM2Uzy4DURTGf+1C6B4P0H09AGGpsRTsCKIiJGJfz8CmD4CFiI1qN5hFlyJegKmgHqArlv7kJl+Tm+md6ehtxJecZOY7937f3DPnHvgnyADrQB04A9bEDQRDwBXwDTwAoZ5rQHYQBpsS3LK4HXHmJN44BR4dfKicNxqKtHwqFIFzIADaiiASbRmsau1sWvE54At4dohGY08GL8BnWpO66mu6Jy3M2qY6qyfegGPrvaROiqKk6MDsafUSz6k8ZYur6URRGK5qvZdVJqMRiwn196LFbYjb7nEPFsQVkgyWHIuywKX40LrJF5FxUXB8XBf2Y46Z0SyqStg1i3Laa5e3CyfAK/2jBRwlLbgDbjwMAuA2aYG5nRUPg4o0nBjTT9pVfwd9xJM0Rl0GU0oWPQzupTHpMlhRMu9Rorw0ll3JzkWZ9jCYkca8KzmiqfiuMfzb8jSAD03h4bgvGAcOges+DMyeAzXL3+EHWw6KXB5JpnQAAAAASUVORK5CYII="
-          />
+    <header>
+      <h1><img src="images/logo.svg" width="140" alt="Coffee Masters" /></h1>
+      <nav>
+        <a class="navlink material-symbols-outlined" id="linkHome" href="/">
+          local_cafe
         </a>
-      </header>
-    </div>
-    <div>
-      <header class="page-header"></header>
-    </div>
+        <a
+          class="navlink material-symbols-outlined"
+          id="linkOrder"
+          href="/order"
+        >
+          shopping_cart
+        </a>
+        <span id="badge" hidden></span>
+      </nav>
+    </header>
 
-    <section class="products-content flex">
-      <aside>
-        <h3>Categories</h3>
-        <ul>
-          <li>
-            <a href="/shop-all"> Shop All</a>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <a href="/best-sellers">Best-sellers</a>
-          </li>
-        </ul>
-      </aside>
-      <section class="products-container"></section>
-    </section>
+    <main></main>
 
-    <div class="page-overlay"></div>
-    <div class="cart-dialog">
-      <header
-        class="flex align-items-center justify-content-between"
-        aria-label="Close cart"
-      >
-        <span class="cart-title">Cart</span>
-        <button class="close-cart c-pointer">
-          <img
-            width="20"
-            height="20"
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABBUlEQVR4nO3ZTQqDMBAF4HeKPOkV2+MWbE9jKXUhRcQk8xeZt3Il8xFNZgiQyWQyV8odwORdBH41fGtpygPAAmB2xkxrDctaU3UKgOf6gjeAG+zDTQ2vnho8MZRCeGIojfDAUAthiaE2wgJjhtDEmCM0MG4ISYw7QgITBtGDCYdowYRF1GDCI85ghkEcYYZD7M0Q899zhEGteWWGW4lttp+T53DWlUt8Wtz5sSOMzVU52p2GwfDEFhsew4pzIiyGDYddOAw7TuwwGAq0He4YCvZObhgqNIDmGCp2sWYYi1a8aGMs54mihfEYioo0xnOyK1KYCONpkcBc5urtMpehmUwmg3D5AAklyc9YEtl/AAAAAElFTkSuQmCC"
-          />
-        </button>
-      </header>
-      <div class="cart-content-container"></div>
-    </div>
-
-    <template id="products-container">
-      <section class="product-section"></section>
+    <template id="menu-page-template">
+      <section>
+        <ul id="menu"></ul>
+      </section>
     </template>
 
     <template id="product-item-template">
       <article>
         <a href="#">
-          <img src="" alt="" />
+          <img />
           <section>
             <div>
               <h4></h4>
               <p class="price"></p>
+              <p></p>
             </div>
+
             <button>Add</button>
           </section>
         </a>
       </article>
     </template>
 
-    <template id="empty-cart-item-template">
-      <article>
-        <a href="#" class="flex align-items-center">
-          <img src="" alt="" />
-          <section>
-            <div>
-              <h4></h4>
-              <p class="price"></p>
-              <select name="cart-item-options" id="cart-item-options">
-                <option value="#"></option>
-              </select>
-            </div>
-            <button>Add to cart</button>
-          </section>
-        </a>
-      </article>
+    <template id="order-form-template">
+      <form>
+        <label for="name">Your Name</label>
+        <input name="name" required />
+        <label for="phone">Your Phone Number</label>
+        <input name="phone" type="tel" />
+        <label for="email">Your Email</label>
+        <input name="email" type="email" />
+        <button type="submit">Place Order</button>
+      </form>
+    </template>
+
+    <template id="details-page-template">
+      <header>
+        <a href="#" onclick="app.router.go('/'); event.preventDefault()"
+          >&lt; Back</a
+        >
+        <h2></h2>
+        <a></a>
+      </header>
+      <img src="" />
+      <p class="description"></p>
+      <p class="price"></p>
+      <button>Add to cart</button>
+    </template>
+
+    <template id="cart-item-template">
+      <li>
+        <p class="qty"></p>
+        <p class="name"></p>
+        <p class="price"></p>
+        <p class="toolbar">
+          <a href="#" class="delete-button"> 🗑️ </a>
+        </p>
+      </li>
     </template>
   </body>
 </html>

@@ -1,21 +1,19 @@
 const Store = {
-  products: null,
-  cart: [],
-};
+    menu: null,
+    cart: []
+}
 
-const proxiesStore = new Proxy(Store, {
-  set(target, property, value) {
-    target[property] = value;
-    if (property === "products") {
-      window.dispatchEvent(new Event("appProductsChange"));
+const proxiedStore = new Proxy(Store, {
+    set(target, property, value) {
+        target[property] = value;
+        if (property=="menu") {
+            window.dispatchEvent(new Event("appmenuchange"));
+        }
+        if (property=="cart") {
+            window.dispatchEvent(new Event("appcartchange"));
+        }
+        return true;
     }
-
-    if (property === "cart") {
-      window.dispatchEvent(new Event("appCartChange"));
-    }
-
-    return true;
-  },
 });
 
-export default proxiesStore;
+export default proxiedStore;
